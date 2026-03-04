@@ -1,4 +1,4 @@
-# Polymarket-Kalshi BTC Arbitrage Tool
+# Polymarket-Kalshi BTC Arbitrage bot
 
 15-minute BTC market arbitrage bot that detects price differences between **Polymarket** and **Kalshi** and decides **when to buy on Polymarket** based on configurable rules.
 
